@@ -13,7 +13,7 @@ namespace SistemaReserva.DAL
         {
             using (StreamWriter sw = File.AppendText(filePath))
             {
-                sw.WriteLine($"{habitacion.IdHabitacion},{habitacion.Tipo},{habitacion.PrecioPorNoche},{habitacion.Capacidad},{habitacion.Disponible}");
+                sw.WriteLine($"{habitacion.IdHabitacion},{habitacion.Tipo},{habitacion.PrecioPorNoche},{habitacion.Capacidad},{habitacion.EsDisponible()}");
             }
         }
 
@@ -39,6 +39,39 @@ namespace SistemaReserva.DAL
                 }
             }
             return habitaciones;
+        }
+    }
+    public class Habitacion
+    {
+        public int IdHabitacion { get; set; }
+        public TipoHabitacion Tipo { get; set; }
+        public decimal PrecioPorNoche { get; set; }
+        private bool Disponible { get; set; }
+        public int Capacidad { get; set; }
+        private static readonly Dictionary<TipoHabitacion, decimal> Precios = new Dictionary<TipoHabitacion, decimal>
+        {
+            { TipoHabitacion.Económica, 100000m },
+            { TipoHabitacion.Estándar, 150000m },
+            { TipoHabitacion.Suite, 250000m }
+        };
+
+        public Habitacion(int idHabitacion, TipoHabitacion tipo, decimal precioPorNoche, bool disponible, int capacidad)
+        {
+            IdHabitacion = idHabitacion;
+            Tipo = tipo;
+            PrecioPorNoche = precioPorNoche;
+            Disponible = disponible;
+            Capacidad = capacidad;
+        }
+
+        public bool EsDisponible()
+        {
+            return Disponible;
+        }
+
+        public override string ToString()
+        {
+            return $"{IdHabitacion},{Tipo},{PrecioPorNoche},{Capacidad},{Disponible}";
         }
     }
 }
