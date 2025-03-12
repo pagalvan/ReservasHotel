@@ -49,5 +49,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SistemaReserva.BLL\SistemaReserva.BLL.csproj">
+      <Project>{0e0b9955-d4a9-46bc-abf6-15f278b06d3e}</Project>
+      <Name>SistemaReserva.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SistemaReserva.Entities\SistemaReserva.Entities.csproj">
+      <Project>{845e329f-a87b-4abc-b798-f2c4186dcfdb}</Project>
+      <Name>SistemaReserva.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
